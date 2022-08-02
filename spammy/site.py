@@ -22,8 +22,7 @@ def stats(request):
         "Hams: %d<br/>"
         "Spams: %d")
     uptime = str(datetime.now() - STARTED).split('.')[0]
-    resp = response % (uptime, STARTED.strftime(DATE_FMT), HAMS, SPAMS)
-    return resp
+    return response % (uptime, STARTED.strftime(DATE_FMT), HAMS, SPAMS)
 
 
 @route('/score')

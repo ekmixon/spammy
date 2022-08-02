@@ -13,7 +13,7 @@ class SpammyIntegrationTestCase(TestCase):
         self.site_factory = SpammySite(config)
         self.port = reactor.listenTCP(0, self.site_factory)
         addr = self.port.getHost()
-        self.url = "http://%s:%s" % (addr.host, addr.port)
+        self.url = f"http://{addr.host}:{addr.port}"
 
     def tearDown(self):
         # Cancel any DelayedCalls (i.e. Session.expire())
@@ -24,12 +24,12 @@ class SpammyIntegrationTestCase(TestCase):
         self.assertTrue(expected in data)
 
     def test_stats_page(self):
-        p = getPage('%s/stats' % self.url)
+        p = getPage(f'{self.url}/stats')
         p.addCallback(self._data_contains, 'Uptime')
         return p
     
     def test_score_page(self):
-        p = getPage('%s/score' % self.url)
+        p = getPage(f'{self.url}/score')
         p.addCallback(self._data_contains, '0.0')
         return p
 
